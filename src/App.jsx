@@ -153,13 +153,12 @@ function AboutContact({ section, close }) {
 }
 
 function ProjectCard({ project, index }) {
-  const [expanded, setExpanded] = useState(false);
   return <article className="project reveal" aria-labelledby={`title-${project.id}`}>
     <div className="project-meta tw:flex tw:items-center tw:justify-between tw:gap-4">
       <span><span className="project-number">0{index + 1}</span>{project.category}</span>
       <span className="project-type">{project.id === 'marvel' ? 'COMMUNITY BUILD' : 'WEB APPLICATION'}</span>
     </div>
-    <div className={`project-wrapper ${expanded ? 'is-expanded' : ''}`}>
+    <div className="project-wrapper">
       <img className="project-image" src={project.image} alt={project.imageAlt} loading="lazy" width="1264" height="712" />
       <div className="project-shade" />
       <div className="project-description" id={`details-${project.id}`}>
@@ -171,8 +170,6 @@ function ProjectCard({ project, index }) {
           {project.live ? <a href={project.live} target="_blank" rel="noreferrer" aria-label={`Open ${project.name} live site (opens in a new tab)`}><Icon name="box-arrow-up-right" /> Live site</a> : <span className="pending-demo"><Icon name="clock" /> {project.note}</span>}
         </div>
       </div>
-      <button className="project-toggle" aria-label={`${expanded ? 'Hide' : 'Show'} details for ${project.name}`} aria-expanded={expanded}
-        aria-controls={`details-${project.id}`} onClick={() => setExpanded(!expanded)}><Icon name={expanded ? 'dash-lg' : 'plus-lg'} /></button>
     </div>
     <div className="project-caption tw:items-start tw:justify-between tw:gap-4"><span>{project.name}</span><span>{project.technologies.slice(0, 2).join(' / ')}</span></div>
   </article>;
