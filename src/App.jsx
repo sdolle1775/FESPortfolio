@@ -24,30 +24,52 @@ function SocialLinks({ openContact, footer = false }) {
   </div>;
 }
 
-function Coffee() {
-  const cup = useRef(null);
-  const [stirring, setStirring] = useState(false);
-  const timer = useRef(null);
-  useEffect(() => () => clearTimeout(timer.current), []);
+function CodeWindow() {
+  const windowRef = useRef(null);
+  const [replay, setReplay] = useState(0);
   function move(event) {
     const box = event.currentTarget.getBoundingClientRect();
-    cup.current.style.setProperty('--tilt-x', `${((event.clientX - box.left) / box.width - 0.5) * 8}deg`);
-    cup.current.style.setProperty('--tilt-y', `${((event.clientY - box.top) / box.height - 0.5) * -8}deg`);
+    windowRef.current.style.setProperty('--tilt-x', `${((event.clientX - box.left) / box.width - 0.5) * 8}deg`);
+    windowRef.current.style.setProperty('--tilt-y', `${((event.clientY - box.top) / box.height - 0.5) * -8}deg`);
   }
   function reset() {
-    cup.current.style.setProperty('--tilt-x', '0deg');
-    cup.current.style.setProperty('--tilt-y', '0deg');
+    windowRef.current.style.setProperty('--tilt-x', '0deg');
+    windowRef.current.style.setProperty('--tilt-y', '0deg');
   }
-  return <div className="coffee-scene entrance" style={{ '--delay': '400ms' }}>
-    <button className={`coffee-interaction ${stirring ? 'is-stirring' : ''}`} aria-label="Stir the coffee"
-      onPointerMove={move} onPointerLeave={reset} onBlur={reset}
-      onClick={() => { clearTimeout(timer.current); setStirring(true); timer.current = setTimeout(() => setStirring(false), 1200); }}>
-      <div className="coffee-object" ref={cup} aria-hidden="true">
-        <div className="steam">{Array.from({ length: 8 }, (_, i) => <span key={i} style={{ '--i': i }} />)}</div>
-        <div className="saucer" /><div className="cup-handle" />
-        <div className="cup-body"><span className="cup-monogram">SD<span>.</span></span></div>
-        <div className="cup-rim"><div className="coffee-liquid" /></div>
-      </div>
+  return <div className="code-scene">
+    <button type="button" className="code-interaction" aria-label="Replay the Hello world coding animation"
+      onPointerMove={move} onPointerLeave={reset} onBlur={reset} onClick={() => setReplay(value => value + 1)}>
+      <span className="code-float">
+        <span className="code-object" ref={windowRef} aria-hidden="true">
+          <span className="code-backplate" />
+          <span className="code-window" key={replay}>
+            <span className="code-toolbar">
+              <span className="window-dots"><span /><span /><span /></span>
+              <span className="code-filename">hello-world.jsx</span>
+              <Icon name="code-slash" />
+            </span>
+            <span className="code-editor">
+              <code>
+                <span className="code-line" style={{ '--line': 0 }}><span className="code-gutter">1</span><span className="syntax-purple">function</span> <span className="syntax-blue">Hello</span>() {'{'}</span>
+                <span className="code-line" style={{ '--line': 1 }}><span className="code-gutter">2</span>{'  '}<span className="syntax-purple">return</span> (</span>
+                <span className="code-line" style={{ '--line': 2 }}><span className="code-gutter">3</span>{'    '}<span className="syntax-green">&lt;h1&gt;</span>Hello, world.<span className="syntax-green">&lt;/h1&gt;</span></span>
+                <span className="code-line" style={{ '--line': 3 }}><span className="code-gutter">4</span>{'  '});</span>
+                <span className="code-line" style={{ '--line': 4 }}><span className="code-gutter">5</span>{'}'}<span className="code-caret" /></span>
+              </code>
+            </span>
+            <span className="code-preview">
+              <span className="preview-caption"><span className="preview-dot" />LIVE PREVIEW</span>
+              <span className="preview-greeting">Hello, world<span>.</span><span className="hello-wave">✦</span></span>
+              <span className="preview-rule" />
+              <span className="preview-rule short" />
+            </span>
+            <span className="code-status"><Icon name="check-circle-fill" /><span>Made with a little curiosity.</span><span className="status-sparkle">✧</span></span>
+          </span>
+          <span className="code-badge">&lt;/&gt;</span>
+          <span className="code-sparkle sparkle-one">✦</span>
+          <span className="code-sparkle sparkle-two">✧</span>
+        </span>
+      </span>
     </button>
   </div>;
 }
@@ -225,7 +247,7 @@ export default function App() {
               <p className="hero-intro entrance" style={{ '--delay': '400ms' }}>I'm a <strong className="accent">{profile.role}</strong> {profile.intro} Here's a bit more <button className="inline-button accent" onClick={() => open('about')}>about me.</button></p>
               <SocialLinks openContact={() => open('contact')} />
             </div>
-            <Coffee />
+            <CodeWindow />
           </div>
           <a href="#projects" className="scroll-indicator" aria-label="Scroll to my projects"><span /></a>
         </section>
