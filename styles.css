@@ -110,9 +110,10 @@
   .project-links a:hover { color: #d5b2ff; }
   .project-links i { font-size: 16px; margin-right: 7px; }
   .pending-demo { color: #c8c2d4; font-size: 11px; }
-  .project-wrapper:hover .project-image, .project-wrapper:focus-within .project-image { transform: scale(1.07); filter: blur(4px); }
-  .project-wrapper:hover .project-shade, .project-wrapper:focus-within .project-shade { opacity: 1; }
-  .project-wrapper:hover .project-description, .project-wrapper:focus-within .project-description { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
+  /* Keep keyboard-focused links visible without latching the overlay after mouse clicks. */
+  .project-wrapper:hover .project-image, .project-wrapper:has(:focus-visible) .project-image { transform: scale(1.07); filter: blur(4px); }
+  .project-wrapper:hover .project-shade, .project-wrapper:has(:focus-visible) .project-shade { opacity: 1; }
+  .project-wrapper:hover .project-description, .project-wrapper:has(:focus-visible) .project-description { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
   .project-caption { display: flex; margin: 17px 4px 0; font-size: 14px; font-weight: 700; }
   .project-caption > span:last-child { color: var(--muted); font-size: 11px; font-weight: 400; padding-top: 2px; }
   .contact-invitation { max-width: 820px; padding: 18px 30px 105px; }
@@ -213,7 +214,7 @@
     .project-image { height: auto; aspect-ratio: 1.78; }
     .project-shade { display: none; }
     .project-description { position: relative; inset: auto; opacity: 1; transform: none !important; padding: 25px; background: #24222b; pointer-events: auto; }
-    .project-wrapper:hover .project-image, .project-wrapper:focus-within .project-image { transform: none; filter: none; }
+    .project-wrapper:hover .project-image, .project-wrapper:has(:focus-visible) .project-image { transform: none; filter: none; }
     .project-description h3 { font-size: 26px; }
     .project-tech { font-size: 12px; line-height: 1.6; }
     .project-copy { font-size: 13px; line-height: 1.7; margin-block: 15px 20px; }
