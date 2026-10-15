@@ -34,7 +34,7 @@ export const projects = [
     technologies: ['Python', 'TypeScript', 'HTML & CSS'],
     description: 'A community build of Marvel LCG Digital, extending the original Irefrixs project with campaign support, new content, gameplay corrections, and interface improvements.',
     image: marvelImage,
-    imageAlt: 'Gameplay screenshot from the Marvel LCG Digital repository',
+    imageAlt: 'Daredevil and Echo in a two-player Marvel Champions game against Typhoid Mary',
     repository: 'https://github.com/sdolle1775/marvel-lcg',
     live: '',
     note: 'Live demo coming soon',
