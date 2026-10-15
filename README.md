@@ -58,3 +58,9 @@ To enable direct sending, copy `.env.example` to `.env.local` and set the EmailJ
 ## Checks
 
 `npm run build` is run in GitHub Actions on pushes and pull requests. Browser QA covers desktop and phone layouts, image loading, modal open/close, focus restoration, theme persistence, project details, and form validation.
+
+## Deployment
+
+The live portfolio is hosted at [sdolle1775.github.io/FESPortfolio](https://sdolle1775.github.io/FESPortfolio/).
+
+Every push to `main` builds and deploys `dist/` to GitHub Pages. The workflow can also be run manually from GitHub Actions. Other branches and pull requests only run the build check. Repository Settings → Pages uses **GitHub Actions** as its publishing source.
