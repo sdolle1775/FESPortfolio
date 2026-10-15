@@ -1,7 +1,5 @@
 # Samuel Dolle — Portfolio
 
-A React portfolio built from the original FESPortfolio starter, following the layout and interactions of the supplied David Hyesung Lee reference. The animation gallery is omitted.
-
 ## Stack
 
 - React and Vite
@@ -61,6 +59,6 @@ To enable direct sending, copy `.env.example` to `.env.local` and set the EmailJ
 
 ## Deployment
 
-The live portfolio is hosted at [sdolle1775.github.io/FESPortfolio](https://sdolle1775.github.io/FESPortfolio/).
+The live portfolio is hosted at [sdolle1775.github.io/Portfolio](https://sdolle1775.github.io/Portfolio/).
 
 Every push to `main` builds and deploys `dist/` to GitHub Pages. The workflow can also be run manually from GitHub Actions. Other branches and pull requests only run the build check. Repository Settings → Pages uses **GitHub Actions** as its publishing source.
