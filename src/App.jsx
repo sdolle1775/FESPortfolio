@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Alert, Button, Form, Modal, Offcanvas, Spinner } from 'react-bootstrap';
 import emailjs from '@emailjs/browser';
 import { profile, projects, skills } from './content.js';
+import frontendArt from '../assets/frontend-art.png';
 
 function Icon({ name, className = '' }) {
   if (name === 'react') return <svg width="42" height="42" viewBox="-12 -12 24 24" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true"><circle r="1.8" fill="currentColor" stroke="none" /><ellipse rx="11" ry="4.2" /><ellipse rx="11" ry="4.2" transform="rotate(60)" /><ellipse rx="11" ry="4.2" transform="rotate(120)" /></svg>;
@@ -24,53 +25,26 @@ function SocialLinks({ openContact, footer = false }) {
   </div>;
 }
 
-function CodeWindow() {
-  const windowRef = useRef(null);
-  const [replay, setReplay] = useState(0);
+function FrontendArt() {
+  const artRef = useRef(null);
   function move(event) {
+    if (event.pointerType !== 'mouse' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const box = event.currentTarget.getBoundingClientRect();
-    windowRef.current.style.setProperty('--tilt-x', `${((event.clientX - box.left) / box.width - 0.5) * 8}deg`);
-    windowRef.current.style.setProperty('--tilt-y', `${((event.clientY - box.top) / box.height - 0.5) * -8}deg`);
+    artRef.current.style.setProperty('--tilt-x', `${((event.clientX - box.left) / box.width - 0.5) * 10}deg`);
+    artRef.current.style.setProperty('--tilt-y', `${((event.clientY - box.top) / box.height - 0.5) * -10}deg`);
   }
   function reset() {
-    windowRef.current.style.setProperty('--tilt-x', '0deg');
-    windowRef.current.style.setProperty('--tilt-y', '0deg');
+    artRef.current.style.setProperty('--tilt-x', '0deg');
+    artRef.current.style.setProperty('--tilt-y', '0deg');
   }
-  return <div className="code-scene">
-    <button type="button" className="code-interaction" aria-label="Replay the Hello world coding animation"
-      onPointerMove={move} onPointerLeave={reset} onBlur={reset} onClick={() => setReplay(value => value + 1)}>
-      <span className="code-float">
-        <span className="code-object" ref={windowRef} aria-hidden="true">
-          <span className="code-backplate" />
-          <span className="code-window" key={replay}>
-            <span className="code-toolbar">
-              <span className="window-dots"><span /><span /><span /></span>
-              <span className="code-filename">hello-world.jsx</span>
-              <Icon name="code-slash" />
-            </span>
-            <span className="code-editor">
-              <code>
-                <span className="code-line" style={{ '--line': 0 }}><span className="code-gutter">1</span><span className="syntax-purple">function</span> <span className="syntax-blue">Hello</span>() {'{'}</span>
-                <span className="code-line" style={{ '--line': 1 }}><span className="code-gutter">2</span>{'  '}<span className="syntax-purple">return</span> (</span>
-                <span className="code-line" style={{ '--line': 2 }}><span className="code-gutter">3</span>{'    '}<span className="syntax-green">&lt;h1&gt;</span>Hello, world.<span className="syntax-green">&lt;/h1&gt;</span></span>
-                <span className="code-line" style={{ '--line': 3 }}><span className="code-gutter">4</span>{'  '});</span>
-                <span className="code-line" style={{ '--line': 4 }}><span className="code-gutter">5</span>{'}'}<span className="code-caret" /></span>
-              </code>
-            </span>
-            <span className="code-preview">
-              <span className="preview-caption"><span className="preview-dot" />LIVE PREVIEW</span>
-              <span className="preview-greeting">Hello, world<span>.</span><span className="hello-wave">✦</span></span>
-              <span className="preview-rule" />
-              <span className="preview-rule short" />
-            </span>
-            <span className="code-status"><Icon name="check-circle-fill" /><span>Made with a little curiosity.</span><span className="status-sparkle">✧</span></span>
-          </span>
-          <span className="code-badge">&lt;/&gt;</span>
-          <span className="code-sparkle sparkle-one">✦</span>
-          <span className="code-sparkle sparkle-two">✧</span>
-        </span>
-      </span>
-    </button>
+  return <div className="frontend-art-scene" aria-hidden="true">
+    <div className="frontend-art-interaction" onPointerMove={move} onPointerLeave={reset}>
+      <div className="frontend-art-float">
+        <div className="frontend-art-object" ref={artRef}>
+          <img className="frontend-art-image" src={frontendArt} alt="" width="1254" height="1254" draggable="false" />
+        </div>
+      </div>
+    </div>
   </div>;
 }
 
@@ -247,7 +221,7 @@ export default function App() {
               <p className="hero-intro entrance" style={{ '--delay': '400ms' }}>I'm a <strong className="accent">{profile.role}</strong> {profile.intro} Here's a bit more <button className="inline-button accent" onClick={() => open('about')}>about me.</button></p>
               <SocialLinks openContact={() => open('contact')} />
             </div>
-            <CodeWindow />
+            <FrontendArt />
           </div>
           <a href="#projects" className="scroll-indicator" aria-label="Scroll to my projects"><span /></a>
         </section>

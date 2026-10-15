@@ -7,10 +7,12 @@ A React portfolio built from the original FESPortfolio starter, following the la
 - React and Vite
 - Tailwind CSS 4 for layout, spacing, and responsive utilities
 - Bootstrap 5 and React Bootstrap for the accessible modal, mobile offcanvas navigation, forms, alerts, and buttons
-- Bootstrap Icons and custom CSS for the visual identity, original code-window illustration, and animations
+- Bootstrap Icons, original transparent frontend artwork, and custom CSS animations
 - Optional EmailJS integration
 
 Tailwind utilities use the `tw:` prefix. Bootstrap and custom styles have explicit cascade layers, and Tailwind Preflight is omitted so the two frameworks do not apply competing resets.
+
+The transparent frontend artwork was created with built-in image generation; its saved prompt and provenance are in [assets/frontend-art.prompt.txt](assets/frontend-art.prompt.txt).
 
 ## Run
 
@@ -44,13 +46,14 @@ To enable direct sending, copy `.env.example` to `.env.local` and set the EmailJ
 
 ## Interaction and accessibility
 
-- Staggered hero entrance, original sliding code window with a typing sequence, pointer-responsive tilt, click-to-replay interaction, and scroll indicator
+- Staggered hero entrance, original frontend artwork with a slide-in entrance, gentle floating, pointer-responsive tilt, hover lift, and scroll indicator
 - Project zoom/blur/overlay transitions with mouse and keyboard access
 - Project descriptions always visible on phone and touch layouts
 - Light/dark preference saved in local storage
 - Focus-trapped, keyboard-dismissible Bootstrap dialog and mobile navigation
 - Form labels, input validation, status announcements, and honest email-draft fallback
-- Reduced-motion preference respected
+- Decorative hero artwork is hidden from assistive technology and omitted on phone layouts
+- Reduced-motion preference respected; hero artwork motion and hover transforms are disabled
 
 ## Checks
 
